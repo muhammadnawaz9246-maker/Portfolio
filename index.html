@@ -269,6 +269,8 @@ nav.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:1
   background:radial-gradient(240px 140px at 70% 10%,var(--wash-a),transparent 70%),linear-gradient(var(--grid) 1px,transparent 1px) 0 0/22px 22px,linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/22px 22px,var(--bg-2);
   display:grid;place-items:center;color:var(--wheat);}
 .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.media img:not([src]){display:none;}
+.media.has-img > svg,.media.has-img figcaption{display:none;}
 .media svg.big{width:64px;height:64px;stroke-width:1.1;}
 .media figcaption{position:absolute;left:14px;bottom:12px;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);}
 .media .badge{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:.7rem;font-weight:600;color:var(--wheat);border:1px solid var(--line-2);border-radius:999px;padding:4px 10px;background:var(--nav-bg);}
@@ -439,7 +441,7 @@ nav.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:1
   <div class="hero-grid">
     <div>
       <div class="who rise" style="--i:0">
-        <span class="avatar" data-photo=""><span>MN</span></span>
+        <span class="avatar" data-photo="assets/nawaz-photo.jpg"><span>MN</span></span>
         <p class="eyebrow">Product Owner · Product Strategy · Telecom &amp; Digital</p>
       </div>
       <h1 class="rise" style="--i:1"><span class="l1">From idea to</span><span class="l2"><span id="rot">launch.</span><span class="caret"></span></span></h1>
@@ -577,7 +579,7 @@ nav.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:1
 <div class="page" id="contact" data-name="Contact"><div class="wrap contact">
   <div class="contact-grid">
     <div>
-      <span class="avatar big-avatar rise" style="--i:0" data-photo=""><span>MN</span></span>
+      <span class="avatar big-avatar rise" style="--i:0" data-photo="assets/nawaz-photo.jpg"><span>MN</span></span>
       <h2 class="rise" style="--i:1">Let's build your <em>next product.</em></h2>
       <p class="sub rise" style="--i:2">Open to Product Manager, Product Owner and Technical Product Manager roles, in Pakistan, remote or international.</p>
     </div>
@@ -844,22 +846,31 @@ nav.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:1
   stair.addEventListener('keydown', function(e){ var g = e.target.closest('.node'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); e.stopPropagation(); pickStage(+g.dataset.k); } });
   showStage(0, false);
 
+  /* load a picture only if the file exists; a missing file keeps the drawn placeholder */
+  function loadImg(img){
+    if (!img) return;
+    var src = img.getAttribute('data-src'); img.removeAttribute('data-src');
+    var probe = new Image();
+    probe.onload = function(){ img.src = src; img.parentElement.classList.add('has-img'); };
+    probe.onerror = function(){ img.remove(); };
+    probe.src = src;
+  }
   /* PRODUCTS: list on the left, one product shown in full on the right.
      To add a picture, set img to its file name, e.g. 'assets/kz.jpg'. */
   var PRODUCTS = [
-    { name:'Khushaal Zamindar (KZ)', short:'Khushaal Zamindar', tag:'IVR · Agri-tech', badge:'Flagship', icon:'i-sprout', img:'',
+    { name:'Khushaal Zamindar (KZ)', short:'Khushaal Zamindar', tag:'IVR · Agri-tech', badge:'Flagship', icon:'i-sprout', img:'assets/kz.jpg',
       desc:"Telenor's largest agri-tech service, giving farmers personalized, real-time agriculture advisory over IVR, WebView and an AI chatbot.",
       impact:['Subscriber, engaged and charged bases up <b>30%, 42% and 53%</b>','Moved from IVR to <b>Telenor Agri WebView</b>, digital adoption up <b>30%</b>','Partner integrations including <b>Pak Agri Market</b>'] },
-    { name:'Telenor Agri WebView', short:'Telenor Agri WebView', tag:'Digital platform', badge:'+30% adoption', icon:'i-layers', img:'',
+    { name:'Telenor Agri WebView', short:'Telenor Agri WebView', tag:'Digital platform', badge:'+30% adoption', icon:'i-layers', img:'assets/agri-webview.jpg',
       desc:'Taking KZ from an IVR service to a full digital platform, with live mandi rates and an online marketplace.',
       impact:['Digital adoption up <b>30%</b>','Mandi Rates API integrated into the WebView','Marketplace extended with partner portals, lifting platform engagement <b>7–8%</b>'] },
-    { name:'Mosami Malomat Service (MMS)', short:'Mosami Malomat Service', tag:'VAS · Weather', badge:'Telecom VAS', icon:'i-cloud', img:'',
+    { name:'Mosami Malomat Service (MMS)', short:'Mosami Malomat Service', tag:'VAS · Weather', badge:'Telecom VAS', icon:'i-cloud', img:'assets/mms.jpg',
       desc:'A weather information service for farmers, run for Telenor alongside KZ.',
       impact:['Owned end to end as part of my VAS portfolio','Requirements, launch and performance tracking','Content and campaigns run with the studio team'] },
-    { name:'Khushaal Angan', short:'Khushaal Angan', tag:'VAS', badge:'Telecom VAS', icon:'i-home', img:'',
+    { name:'Khushaal Angan', short:'Khushaal Angan', tag:'VAS', badge:'Telecom VAS', icon:'i-home', img:'assets/khushaal-angan.jpg',
       desc:'A Telenor value-added service in the Khushaal family, owned alongside KZ.',
       impact:['Owned end to end as part of my VAS portfolio','Requirements, launch and performance tracking','Customer feedback turned into product improvements'] },
-    { name:'Zarai Market', short:'Zarai Market', tag:'Marketplace', badge:'Launched', icon:'i-store', img:'',
+    { name:'Zarai Market', short:'Zarai Market', tag:'Marketplace', badge:'Launched', icon:'i-store', img:'assets/zarai-market.jpg',
       desc:'A marketplace product for farmers, taken from market research to launch and post-launch analysis.',
       impact:['Launched as <b>Product Executive</b>','Market research shaped the product strategy','Post-launch performance tracked and reported'] }
   ];
@@ -876,11 +887,12 @@ nav.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:1
     var p = PRODUCTS[k];
     Array.prototype.forEach.call(prodTabs.children, function(t, j){ t.setAttribute('aria-selected', j === k ? 'true' : 'false'); });
     $('prodPanel').setAttribute('aria-labelledby', 'pt' + k);
-    var media = p.img ? '<img src="' + p.img + '" alt="' + p.name + '">' : '<svg class="i big" aria-hidden="true"><use href="#' + p.icon + '"/></svg><figcaption>' + p.tag + '</figcaption>';
+    var media = '<svg class="i big" aria-hidden="true"><use href="#' + p.icon + '"/></svg><figcaption>' + p.tag + '</figcaption>' + (p.img ? '<img data-src="' + p.img + '" alt="' + p.name + '">' : '');
     $('prodPanel').innerHTML =
       '<figure class="media' + (animate && !reduce ? ' wipe' : '') + '"><span class="badge">' + p.badge + '</span>' + media + '</figure>' +
       '<div class="p-body' + (animate && !reduce ? ' swap-in' : '') + '"><span class="c-tag">' + p.tag + '</span><h3>' + p.name + '</h3><p>' + p.desc + '</p>' +
       '<ul class="impact">' + p.impact.map(function(x){ return '<li><span>' + x + '</span></li>'; }).join('') + '</ul></div>';
+    loadImg($('prodPanel').querySelector('img[data-src]'));
     var t = prodTabs.children[k]; if (t && prodTabs.scrollWidth > prodTabs.clientWidth) prodTabs.scrollTo({ left: t.offsetLeft - 16, behavior: reduce ? 'auto' : 'smooth' });
     fitCheck();
   }
@@ -975,10 +987,12 @@ nav.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:1
     try { navigator.clipboard.writeText(text).then(ok, fallback); } catch(err) { fallback(); }
   });
 
-  /* ---------- photo: set data-photo="assets/nawaz.jpg" on .avatar to show it ---------- */
+  /* ---------- photo: shown when assets/nawaz-photo.jpg exists; otherwise the MN initials stay ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.avatar[data-photo]'), function(a){
     var src = a.getAttribute('data-photo'); if (!src) return;
-    a.innerHTML = '<img src="' + src + '" alt="Muhammad Nawaz">';
+    var probe = new Image();
+    probe.onload = function(){ a.innerHTML = '<img src="' + src + '" alt="Muhammad Nawaz">'; };
+    probe.src = src;
   });
 
   /* ---------- particles ---------- */
