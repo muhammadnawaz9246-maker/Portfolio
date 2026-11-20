@@ -268,7 +268,7 @@ nav.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:1
 .media{position:relative;margin:0;aspect-ratio:16/10;max-width:100%;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);
   background:radial-gradient(240px 140px at 70% 10%,var(--wash-a),transparent 70%),linear-gradient(var(--grid) 1px,transparent 1px) 0 0/22px 22px,linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/22px 22px,var(--bg-2);
   display:grid;place-items:center;color:var(--wheat);}
-.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#FFFFFF;}
 .media img:not([src]){display:none;}
 .media.has-img > svg,.media.has-img figcaption{display:none;}
 .media svg.big{width:64px;height:64px;stroke-width:1.1;}
@@ -861,16 +861,16 @@ nav.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:1
     { name:'Khushaal Zamindar (KZ)', short:'Khushaal Zamindar', tag:'IVR · Agri-tech', badge:'Flagship', icon:'i-sprout', img:'assets/kz.jpg',
       desc:"Telenor's largest agri-tech service, giving farmers personalized, real-time agriculture advisory over IVR, WebView and an AI chatbot.",
       impact:['Subscriber, engaged and charged bases up <b>30%, 42% and 53%</b>','Moved from IVR to <b>Telenor Agri WebView</b>, digital adoption up <b>30%</b>','Partner integrations including <b>Pak Agri Market</b>'] },
-    { name:'Telenor Agri WebView', short:'Telenor Agri WebView', tag:'Digital platform', badge:'+30% adoption', icon:'i-layers', img:'assets/agri-webview.jpg',
+    { name:'Telenor Agri WebView', short:'Telenor Agri WebView', tag:'Digital platform', badge:'+30% adoption', icon:'i-layers', img:'assets/telenor.jpg',
       desc:'Taking KZ from an IVR service to a full digital platform, with live mandi rates and an online marketplace.',
       impact:['Digital adoption up <b>30%</b>','Mandi Rates API integrated into the WebView','Marketplace extended with partner portals, lifting platform engagement <b>7–8%</b>'] },
-    { name:'Mosami Malomat Service (MMS)', short:'Mosami Malomat Service', tag:'VAS · Weather', badge:'Telecom VAS', icon:'i-cloud', img:'assets/mms.jpg',
+    { name:'Mosami Malomat Service (MMS)', short:'Mosami Malomat Service', tag:'VAS · Weather', badge:'Telecom VAS', icon:'i-cloud', img:'assets/telenor.jpg',
       desc:'A weather information service for farmers, run for Telenor alongside KZ.',
       impact:['Owned end to end as part of my VAS portfolio','Requirements, launch and performance tracking','Content and campaigns run with the studio team'] },
-    { name:'Khushaal Angan', short:'Khushaal Angan', tag:'VAS', badge:'Telecom VAS', icon:'i-home', img:'assets/khushaal-angan.jpg',
+    { name:'Khushaal Angan', short:'Khushaal Angan', tag:'VAS', badge:'Telecom VAS', icon:'i-home', img:'assets/telenor.jpg',
       desc:'A Telenor value-added service in the Khushaal family, owned alongside KZ.',
       impact:['Owned end to end as part of my VAS portfolio','Requirements, launch and performance tracking','Customer feedback turned into product improvements'] },
-    { name:'Zarai Market', short:'Zarai Market', tag:'Marketplace', badge:'Launched', icon:'i-store', img:'assets/zarai-market.jpg',
+    { name:'Zarai Market', short:'Zarai Market', tag:'Marketplace', badge:'Launched', icon:'i-store', img:'assets/telenor.jpg',
       desc:'A marketplace product for farmers, taken from market research to launch and post-launch analysis.',
       impact:['Launched as <b>Product Executive</b>','Market research shaped the product strategy','Post-launch performance tracked and reported'] }
   ];
